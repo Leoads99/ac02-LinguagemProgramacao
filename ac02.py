@@ -6,32 +6,30 @@
 # ALUNO 5:
 
 
-try:
-    if nome not in dicio: 
-        raise KeyError ('O nome não se encontra no dicionário!')
-    if nome[2] != 'DESENVOLVEDOR'or 'ANALISTA'or'GERENTE':
-        raise TypeError ('Cargo não existente!')
-    def calcular_salario(dicionario, nome):
-        for x in dicio:
-            if nome[1] == 'DESENVOLVEDOR':
-                if nome[1] >= 2.000:
-                    desconto_desenvolvedor = (nome[1]*15)/100
-                    return desconto_desenvolvedor
-                elif nome[1] < 2.000:
-                    desconto_desenvolvedor = (nome[1]*5)/100
-                    return desconto_desenvolvedor
-            elif nome[1] == 'ANALISTA':
-                if nome[1] >= 3.500:
-                    desconto_analista = (nome[1]*20)/100
-                    return desconto_analista
-                elif nome[1] < 3.500:
-                    desconto_analista = (nome[1]*10)/100
-                    return desconto_analista
-            elif nome[1] == 'GERENTE':
-                if nome[1] >= 4.000:
-                    desconto_gerente = (nome[1]*25)/100
-                    return desconto_gerente
-                elif nome[1] < 2.000:
-                        desconto_gerente = (nome[1]*15)/100
-                        return desconto_gerente
-                        break
+def calcular_salario(dicionario, nome):
+    salario_l = 0
+    
+    
+    ocupacao = dicionario[nome][2]
+    salario_bruto = dicionario[nome][1]
+    if ocupacao == 'DESENVOLVEDOR':
+        if salario_bruto >= 2000:
+            salario_l = salario_bruto - salario_bruto*0.15
+        else:
+            salario_l = salario_bruto - salario_bruto*0.05
+    elif ocupacao == 'ANALISTA':
+        if salario_bruto >= 3500:
+            salario_l = salario_bruto - salario_bruto*0.20
+        else:
+            salario_l = salario_bruto - salario_bruto*0.10
+    elif ocupacao == 'GERENTE':
+        if salario_bruto >= 4000:
+            salario_l = salario_bruto - salario_bruto*0.25
+        else:
+            salario_l = salario_bruto - salario_bruto*0.15
+    else:
+        if nome not in dicionario:
+            raise KeyError
+        if ocupacao != 'DESENVOLVEDOR'or 'ANALISTA'or'GERENTE':
+            raise TypeError
+    return salario_l
